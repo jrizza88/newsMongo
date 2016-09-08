@@ -81,14 +81,9 @@ app.get('/scrape', function(req, res){
 
                 result.title = $(this).children('a').text();
                 result.link = $(this).children('a').attr('href');
+                result.thumbnail = $(this).children('a').attr('href');
 
-                  // var title = $(element).text();
-                  // var link = $(element).find('a').first().attr('href');
-
-
-                  //    console.log("here is your link: " + link);
-                  //    console.log("here is the TITLE: " + title);
- console.log("here are your results: " + result.title + result.link);
+ console.log("here are your results: " + result.title + result.link + result.thumbnail);
               })
              
 
