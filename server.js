@@ -9,10 +9,23 @@ var express = require('express');
 var app = express();
 
 var bodyParser = require('body-parser');
-var cheerio = require("cheerio");
 var expressHandlebars = require("express-handlebars");
 var mongoose = require("mongoose");
+var logger = require('morgan');
+
+var cheerio = require("cheerio");
 var request = require("request");
+
+//use morgan and bodyparser with our app
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+// make a public static directory
+app.use(express.static('public'));
+
+
 
 //var databaseUrl = "news";
 
@@ -33,7 +46,22 @@ db.on('error', function(err){
   console.log("Database error", err);
 });
 
-app.get('/', function(req, res){
+db.once('open', function(){
+  console.log('Mongoose connection successful. ');
+});
+
+// bring in the Note and Article models
+//var Note = require('.models/Note.js');
+//var Article = require('.models/Article.js');
+
+
+// Routes 
+
+app.get('/', function (req, res){
+  res.send(index.html);
+});
+
+app.get('/scrape', function(req, res){
   request('https://www.bloomberg.com/', function(err, response, html){
 
       if (err) {
@@ -44,20 +72,25 @@ app.get('/', function(req, res){
 
     // this is set up to use cheerio. the $ is not jQuery
       var $ = cheerio.load(html);
-        var results =[];
+        
 
             // now use jQuery 
               $('div.hero-v6-story').each(function (index, element){
                 
-                  var title = $(element).text();
-                  var link = $(element).find('a').first().attr('href');
+                var result =[];
+
+                result.title = $(this).children('a').text();
+                result.link = $(this).children('a').attr('href');
+
+                  // var title = $(element).text();
+                  // var link = $(element).find('a').first().attr('href');
 
 
-                     console.log("here is your link: " + link);
-                     console.log("here is the TITLE: " + title);
-
+                  //    console.log("here is your link: " + link);
+                  //    console.log("here is the TITLE: " + title);
+ console.log("here are your results: " + result.title + result.link);
               })
-              console.log("here are your results: " + results);
+             
 
   })
 })
