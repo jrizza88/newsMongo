@@ -1,9 +1,3 @@
-  // "body-parser": "^1.15.2",
-  //   "cheerio": "^0.22.0",
-  //   "express": "^4.14.0",
-  //   "express-handlebars": "^3.0.0",
-  //   "mongoose": "^4.6.0",
-  //   "request": "^2.74.0"
 
 var express = require('express');
 var app = express();
@@ -51,8 +45,8 @@ db.once('open', function(){
 });
 
 // bring in the Note and Article models
-//var Note = require('.models/Note.js');
-//var Article = require('.models/Article.js');
+var Note = require('.models/Note.js');
+var Article = require('.models/Article.js');
 
 
 // Routes 
@@ -75,20 +69,62 @@ app.get('/scrape', function(req, res){
         
 
             // now use jQuery 
-              $('div.hero-v6-story').each(function (index, element){
+              //$('a.hero-v6-story_headline-link').each(function (index, element){
+               $('article h1').each(function (index, element){ 
+               // var result = {};
+             var result = {};
+            result.title = $(this).find('a').text();
+            result.link = $(this).children('a').attr('href');
+
+            // just in case bloomberg does not use their own URLs
+            if (result.link.indexOf('http')<0) {
+              result.link='www.bloomberg.com' + result.link;
+            }
                 
-                var result =[];
+                 // var currentLink = {
+                 // title : $(element).find('a').text(),
+                 // link : $(element).children('a').attr('href')}
+                 //result.thumbnail = $(this).children('a').attr('href');
+ // console.log(currentLink);
+ // result.push(currentLink);
+ //console.log("here are your results: " + currentLink.title + currentLink.link);
+ console.log("Title results: " + result.title);
+ console.log("Link results: " + result.link);
 
-                result.title = $(this).children('a').text();
-                result.link = $(this).children('a').attr('href');
-                result.thumbnail = $(this).children('a').attr('href');
-
- console.log("here are your results: " + result.title + result.link + result.thumbnail);
+ var entry = new Article(result);
+// now, save that entry to the db
+        entry.save(function(err, doc) {
+          // log any errors
+          if (err) {
+            console.log(err);
+          } 
+          // or log the doc
+          else {
+            console.log(doc);
+          }
               })
+
+
              
 
   })
 })
+
+var entry = new Article(result);
+// now, save that entry to the db
+        entry.save(function(err, doc) {
+          // log any errors
+          if (err) {
+            console.log(err);
+          } 
+          // or log the doc
+          else {
+            console.log(doc);
+          }
+      })
+  })
+});
+res.send
 
 app.listen(PORT, function(){
 console.log("PORT is listening on: " + PORT);
