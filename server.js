@@ -45,8 +45,8 @@ db.once('open', function(){
 });
 
 // bring in the Note and Article models
-var Note = require('.models/Note.js');
-var Article = require('.models/Article.js');
+var Note = require('./models/Note.js');
+var Article = require('./models/Article.js');
 
 
 // Routes 
@@ -70,7 +70,7 @@ app.get('/scrape', function(req, res){
 
             // now use jQuery 
               //$('a.hero-v6-story_headline-link').each(function (index, element){
-               $('article h1').each(function (index, element){ 
+        $('article h1').each(function (index, element){ 
                // var result = {};
              var result = {};
             result.title = $(this).find('a').text();
@@ -91,7 +91,7 @@ app.get('/scrape', function(req, res){
  console.log("Title results: " + result.title);
  console.log("Link results: " + result.link);
 
- var entry = new Article(result);
+ var entry = new Article (result);
 // now, save that entry to the db
         entry.save(function(err, doc) {
           // log any errors
@@ -102,29 +102,72 @@ app.get('/scrape', function(req, res){
           else {
             console.log(doc);
           }
-              })
+        })
 
+    })
 
-             
-
-  })
-})
-
-var entry = new Article(result);
-// now, save that entry to the db
-        entry.save(function(err, doc) {
-          // log any errors
-          if (err) {
-            console.log(err);
-          } 
-          // or log the doc
-          else {
-            console.log(doc);
-          }
-      })
-  })
 });
-res.send
+//res.send("Scrape complete");
+
+Article.find({}, function(err, doc){
+      if (err){
+        console.log(err);
+      }
+    else {
+      res.json(doc);
+    }
+  });
+});
+
+  app.get('/article:id', function(req, res){
+    // using the id passed in the id parameter, 
+  // prepare a query that finds the matching one in our db...
+  Article.findOne({'_id': req.params.id})
+  // and populate all of the notes associated with it.
+  .populate('note')
+  // now, execute our query
+  .exec(function(err, doc){
+    // log any errors
+    if (err){
+      console.log(err);
+    } 
+    // otherwise, send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
+});
+
+app.post('/savednote:id', function(req, res){
+              var newNote = new Note(req.body);
+
+              newNote.save(function (err, doc){
+                if (err){
+                  console.err(err)
+                } else {
+                  Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
+                   .exec(function(err, doc){
+                      if (err){
+                       console.log(err);
+                     } else {
+                    res.send(doc);
+                    }
+                  });
+                }
+              });
+            });
+
+app.post('/deletenote:id', function(req, res){
+        Article.find({'_id': req.params.id}, {'note':doc._id})
+          if (err){console.err(err);
+          }
+          Note.find({'_id': doc[0].note}.remove().exec(function (err, doc){
+            if (err){
+              console.err(err)
+            } 
+            
+          });
+});
 
 app.listen(PORT, function(){
 console.log("PORT is listening on: " + PORT);
