@@ -28,4 +28,20 @@ var thisId = $(this).attr('data-id');
 
   })
 
+  // with that done, add the note information to the page
+    .done(function(data){
+      console.log(data);
+   // the title of the article
+$('#notes').append('<h3>' + data.title + '</h3>'); 
+    // an input to enter a new title
+$('#notes').append('input id="titleinput" + name="title" >');
+    // a textarea to add a new note body
+$('#notes').append('<textarea input="bodyinput" + name="body" ></textarea>');
+     // a button to submit a new note, with the id of the article saved to it
+
+
+      // if there's a note in the article
+    })
+
+
 }); //this is end of document.click

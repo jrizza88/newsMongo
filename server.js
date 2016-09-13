@@ -161,7 +161,7 @@ app.post('/deletenote:id', function(req, res){
         Article.find({'_id': req.params.id}, {'note':doc._id})
           if (err){console.err(err);
           }
-          Note.find({'_id': doc[0].note}.remove().exec(function (err, doc){
+          Note.find({'_id': doc[0].note}).remove().exec(function (err, doc){
             if (err){
               console.err(err)
             } 
