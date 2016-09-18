@@ -138,7 +138,7 @@ Article.find({}, function(err, doc){
   });
 });
 
-app.post('/savednote:id', function(req, res){
+app.post('/savednote/:id', function(req, res){
               var newNote = new Note(req.body);
 
               newNote.save(function (err, doc){
@@ -157,7 +157,7 @@ app.post('/savednote:id', function(req, res){
               });
             });
 
-app.post('/deletenote:id', function(req, res){
+app.post('/deletenote/:id', function(req, res){
         Article.find({'_id': req.params.id}, {'note':doc._id})
           if (err){console.err(err);
           }
