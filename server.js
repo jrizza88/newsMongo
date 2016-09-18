@@ -119,7 +119,7 @@ Article.find({}, function(err, doc){
   });
 });
 
-  app.get('/articles:id', function(req, res){
+  app.get('/articles/:id', function(req, res){
     // using the id passed in the id parameter, 
   // prepare a query that finds the matching one in our db...
   Article.findOne({'_id': req.params.id})
