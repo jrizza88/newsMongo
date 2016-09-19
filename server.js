@@ -34,7 +34,7 @@ var mongodbUri = 'mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.
 mongoose.connect(mongodbUri);
 var db = mongoose.connection;
 
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 3000;
 
 db.on('error', function(err){
   console.log("Database error", err);
