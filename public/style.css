@@ -3,9 +3,17 @@ body {
   background-color: #efefef;
 }
 
+html {
+    background-color: #ff6666;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
+
 #articles {
-width: 60%;
-height: 650px;
+width: 40%;
+height: 600px;
 display:inline-block;
 overflow: auto;
 }
@@ -14,6 +22,12 @@ overflow: auto;
 width: 30%;
 float: right;
 }
+
+#wrapper{
+      width:960px;
+      margin: 0 auto;
+      padding-top: 5%;
+    }
 
 textarea, input{
       display:block;

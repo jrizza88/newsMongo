@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>News Documents</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-  <div id="wrapper">
+  <div class='container'>
+
+  <img id="bloombergNews" src="Bloomberg-News-logo.png" alt="Bloomberg Logo" align="left"style="width:50px;height:50px;"><span><h1 id="head">&nbsp;Check out the latest from Bloomberg</h1></span>
     <h1>Welcome to Bloomberg NewsScrapper!</h1>
     <h3><b>Click on the headline to add or delete a note</b></h3>
     <h3>Click the link to go to the article</h3>
   <hr>
+          <div class='row'>
+            <div class='col-md-6'>
+                <div id ="articles"></div>
+             </div>
+             <div class='col-md-6'>
+                <div id="notes"></div>
+             </div>
+          </div>
 
-  <div id ="articles"></div>
-  <div id="notes"></div>
-
+    </div>
 </div>
 <h3> check out the latest headlines and feel free to leave comments on what you think about the articles </h3>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>

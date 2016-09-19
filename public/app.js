@@ -9,9 +9,9 @@
           noteExists = "";
       }
       $('#articles').append('<h2><p data-id="' + data[i]._id + '">' + data[i].title + noteExists+'</p></h2>'+'<a href='+data[i].link +' target = "_blank">'+data[i].link+"<br />");
-      $('#articles').append("____________________________________________________________________________________________________________________");
+      $('#articles').append("__________________________________________________________________________________");
     }
-      $('#articles').append("____________________________________________________________________________________________________________________");
+      $('#articles').append("__________________________________________________________________________________");
   });
 
 // whenever someone clicks a p tag
@@ -51,8 +51,10 @@ $('#notes').append('<textarea input="bodyinput" + name="body" ></textarea>');
           $('#bodyinput').val(data.note.body);
           // this will delete the last note that user entered
           $('#notes').append('<button data-id="' +data._id + ' " id="deletenote">Delete Note</button>');
+           $('#bodyinput,#titleinput').css('background-color', 'purple');
          } else {
           $('#notes').append('<button data-id="' + data._id + ' " id="savednote">Save Note</button>');
+          $('#bodyinput,#titleinput').css('background-color', 'purple');
          }
       });
     }); //this is end of document.click

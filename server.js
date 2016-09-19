@@ -51,9 +51,9 @@ var Article = require('./models/Article.js');
 
 // Routes 
 
-app.get('/', function (req, res){
-  res.send(index.html);
-});
+//app.get('/', function (req, res){
+//  res.send(index.html);
+//});
 
 app.get('/scrape', function(req, res){
   request('https://www.bloomberg.com/', function(err, response, html){
@@ -78,16 +78,10 @@ app.get('/scrape', function(req, res){
 
             // just in case bloomberg does not use their own URLs
             if (result.link.indexOf('http')<0) {
-              result.link='www.bloomberg.com' + result.link;
+              result.link ='www.bloomberg.com' + result.link;
             }
                 
-                 // var currentLink = {
-                 // title : $(element).find('a').text(),
-                 // link : $(element).children('a').attr('href')}
-                 //result.thumbnail = $(this).children('a').attr('href');
- // console.log(currentLink);
- // result.push(currentLink);
- //console.log("here are your results: " + currentLink.title + currentLink.link);
+              
  console.log("Title results: " + result.title);
  console.log("Link results: " + result.link);
 
@@ -119,55 +113,66 @@ Article.find({}, function(err, doc){
   });
 });
 
-  app.get('/articles/:id', function(req, res){
-    // using the id passed in the id parameter, 
-  // prepare a query that finds the matching one in our db...
+ app.get('/articles/:id', function(req, res){
   Article.findOne({'_id': req.params.id})
-  // and populate all of the notes associated with it.
   .populate('note')
-  // now, execute our query
   .exec(function(err, doc){
-    // log any errors
     if (err){
       console.log(err);
-    } 
-    // otherwise, send the doc to the browser as a json object
-    else {
+    } else {
       res.json(doc);
     }
   });
 });
 
+//adds the note id to the article document as a reference back to the note
 app.post('/savednote/:id', function(req, res){
-              var newNote = new Note(req.body);
+  var newNote = new Note(req.body);
 
-              newNote.save(function (err, doc){
-                if (err){
-                  console.err(err)
-                } else {
-                  Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
-                   .exec(function(err, doc){
-                      if (err){
-                       console.log(err);
-                     } else {
-                    res.send(doc);
-                    }
-                  });
-                }
-              });
-            });
+  newNote.save(function(err, doc){
+    if(err){
+      console.log(err);
+    } else {
+      Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
+      .exec(function(err, doc){
+        if (err){
+          console.log(err);
+        } else {
+          res.send(doc);
+        }
+      });
 
-app.post('/deletenote/:id', function(req, res){
-        Article.find({'_id': req.params.id}, {'note':doc._id})
-          if (err){console.err(err);
-          }
-          Note.find({'_id': doc[0].note}).remove().exec(function (err, doc){
-            if (err){
-              console.err(err)
-            } 
-            
-          });
+    }
+  });
 });
+
+//delete the note from both collections (article and notes)
+app.post('/deletenote/:id', function(req, res){
+      Article.find({'_id': req.params.id}, 'note', function(err,doc){
+      // .exec(function(err, doc){
+        if (err){
+          console.log(err);
+        }
+        //deletes the note from the Notes Collection
+          Note.find({'_id' : doc[0].note}).remove().exec(function(err,doc){
+            if (err){
+              console.log(err);
+            }
+
+          });
+        
+      });
+      //deletes the note reference in the article document
+      Article.findOneAndUpdate({'_id': req.params.id}, {$unset : {'note':1}})
+      .exec(function(err, doc){
+        if (err){
+          console.log(err);
+        } else {
+          res.send(doc);
+        }
+      });
+});
+
 
 app.listen(PORT, function(){
 console.log("PORT is listening on: " + PORT);
