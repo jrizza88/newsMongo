@@ -29,9 +29,9 @@ app.use(express.static('public'));
 // use mongojs to hook the database to the db variable 
 //var db = mongojs(databaseUrl, collections);
 
-var mongodbUri = 'mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5';
+//var mongodbUri = 'mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5';
 
-mongoose.connect(mongodbUri);
+mongoose.connect('mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5');
 var db = mongoose.connection;
 
 var PORT = process.env.PORT || 3000;
