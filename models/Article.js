@@ -8,21 +8,21 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
 title: {
     type: String,
-    required: true,
-   // unique: true
+    required: true
+  
 },
 
 link: {
     type: String,
-    required: true,
-  //  unique: true
+    required: true
+
 },
 
-note: {
+note: [{
     type: Schema.Types.ObjectId,
     ref: 'Note'
-  }
-
+  }]
 });
+
 var Article = mongoose.model('Article', ArticleSchema);
 module.exports = Article;

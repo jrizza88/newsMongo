@@ -37,7 +37,7 @@ var db = mongoose.connection;
 var PORT = process.env.PORT || 3000;
 
 db.on('error', function(err){
-  console.log("Database error", err);
+  console.log("Mongoose error", err);
 });
 
 db.once('open', function(){
@@ -51,9 +51,9 @@ var Article = require('./models/Article.js');
 
 // Routes 
 
-//app.get('/', function (req, res){
-//  res.send(index.html);
-//});
+app.get('/', function (req, res){
+  res.send(index.html);
+});
 
 app.get('/scrape', function(req, res){
   request('https://www.bloomberg.com/', function(err, response, html){

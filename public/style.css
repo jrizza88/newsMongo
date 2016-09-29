@@ -9,6 +9,11 @@ html {
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
+}sub
+
+#theHeader {
+ text-align:center;
+left:50%;
 }
 
 #articles {
