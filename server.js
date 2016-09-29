@@ -171,7 +171,7 @@ app.post('/deletenote/:id', function(req, res){
       });
 });
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 
 app.listen(PORT, function(){
 console.log("PORT is listening on: " + PORT);
