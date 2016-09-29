@@ -35,8 +35,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 // bring in the Note and Article models
-var Article = require('./models/article');
-var Note = require('./models/note');
+var Article = require('./models/Article.js');
+var Note = require('./models/Note.js');
 
 
 
