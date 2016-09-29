@@ -34,8 +34,6 @@ app.use(express.static('public'));
 mongoose.connect('mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5');
 var db = mongoose.connection;
 
-var PORT = process.env.PORT || 3000;
-
 db.on('error', function(err){
   console.log("Mongoose error", err);
 });
@@ -52,7 +50,7 @@ var Article = require('./models/Article.js');
 // Routes 
 
 app.get('/', function (req, res){
-  res.send(index.html);
+  res.send('public/index.html');
 });
 
 app.get('/scrape', function(req, res){
@@ -82,8 +80,8 @@ app.get('/scrape', function(req, res){
             }
                 
               
- console.log("Title results: " + result.title);
- console.log("Link results: " + result.link);
+ // console.log("Title results: " + result.title);
+ // console.log("Link results: " + result.link);
 
  var entry = new Article (result);
 // now, save that entry to the db
@@ -173,6 +171,7 @@ app.post('/deletenote/:id', function(req, res){
       });
 });
 
+var PORT = process.env.PORT || 3000;
 
 app.listen(PORT, function(){
 console.log("PORT is listening on: " + PORT);
