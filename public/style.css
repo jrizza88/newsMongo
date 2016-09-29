@@ -9,7 +9,7 @@ html {
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-}sub
+}
 
 #theHeader {
  text-align:center;
@@ -24,12 +24,12 @@ overflow: auto;
 }
 
 #notes {
-width: 30%;
+width: 25%;
 float: right;
 }
 
 #wrapper{
-      width:960px;
+      width:950px;
       margin: 0 auto;
       padding-top: 5%;
     }
@@ -37,14 +37,14 @@ float: right;
 textarea, input{
       display:block;
       width:100%;
-      background-color: #FCF5C7;
+      background-color: #gray;
     }
     input{
       height:36px;
       font-size: 24px;
     }
     textarea{
-      height:200px;
+      height:190px;
       font-size: 18px;
     }
 </style>
