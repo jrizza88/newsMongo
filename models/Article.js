@@ -18,10 +18,10 @@ link: {
 
 },
 
-note: [{
-    type: Schema.Types.ObjectId,
+note: {
+    type: Schema.ObjectId,
     ref: 'Note'
-  }]
+  }
 });
 
 var Article = mongoose.model('Article', ArticleSchema);

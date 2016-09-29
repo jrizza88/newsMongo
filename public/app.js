@@ -33,13 +33,13 @@ var thisId = $(this).attr('data-id');
 
   // with that done, add the note information to the page
     .done(function(data){
-      console.log(data);
+      //console.log(data);
    // the title of the article
 $('#notes').append('<h3>' + data.title + '</h3>'); 
     // an input to enter a new title
 $('#notes').append('<input id="titleinput" + name="title" >');
     // a textarea to add a new note body
-$('#notes').append('<textarea input="bodyinput" + name="body" ></textarea>');
+  $('#notes').append('<textarea id="bodyinput" name="body"></textarea>');
      // a button to submit a new note, with the id of the article saved to it
 
 
@@ -54,22 +54,22 @@ $('#notes').append('<textarea input="bodyinput" + name="body" ></textarea>');
            $('#bodyinput,#titleinput').css('background-color', 'purple');
          } else {
           $('#notes').append('<button data-id="' + data._id + ' " id="savednote">Save Note</button>');
-          $('#bodyinput,#titleinput').css('background-color', 'purple');
+          $('#bodyinput,#titleinput').css('background-color', 'yellow');
          }
       });
     }); //this is end of document.click
 
 
 // when you click on savednote button 
-$(document).on('click', '#savednote',function(){
-  var thisId= $(this).attr('data-id')
+$(document).on('click','#savednote', function(){
+  var thisId= $(this).attr('data-id');
 
   $.ajax({
     method: "POST",
-    url: "/savednote" + thisId,
+    url: "/savednote/" + thisId,
     data: {
-      title: $('titleinput').val(),// value taken from title input
-      body: $('bodyinput').val() // value taken from body put
+      title: $('#titleinput').val(),// value taken from title input
+      body: $('#bodyinput').val() // value taken from body put
     }
   })
   // with that done, add the savednote information to the page
@@ -91,7 +91,7 @@ $(document).on('click', '#deletenote', function(){
 
   $.ajax({
     method: "POST",
-    url: "/deletenote" + thisId,
+    url: "/deletenote/" + thisId,
   })
   .done(function(data){
     console.log("delete note stuff" + data);

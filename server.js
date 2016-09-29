@@ -43,16 +43,16 @@ db.once('open', function(){
 });
 
 // bring in the Note and Article models
-var Article = require('./models/Article');
-var Note = require('./models/Note');
+var Article = require('./models/Article.js');
+var Note = require('./models/Note.js');
 
 
 
 // Routes 
 
-app.get('/', function (req, res){
-  res.send('public/index.html');
-});
+// app.get('/', function (req, res){
+//   res.send('public/index.html');
+// });
 
 app.get('/scrape', function(req, res){
   request('https://www.bloomberg.com/', function(err, response, html){
@@ -76,7 +76,7 @@ app.get('/scrape', function(req, res){
             result.link = $(this).children('a').attr('href');
 
             // just in case bloomberg does not use their own URLs
-            if (result.link.indexOf('http')<0) {
+            if (result.link.indexOf("http")<0) {
               result.link ='www.bloomberg.com' + result.link;
             }
                 
@@ -99,17 +99,21 @@ app.get('/scrape', function(req, res){
 
     })
 
-});
+
 //res.send("Scrape complete");
 
-Article.find({}, function(err, doc){
-      if (err){
-        console.log(err);
+  Article.find({}, function(err, doc){
+        if (err){
+          console.log(err);
+        }
+      else {
+        res.json(doc);
       }
-    else {
-      res.json(doc);
-    }
+    });
+  // request end
   });
+
+//scrape end
 });
 
  app.get('/articles/:id', function(req, res){
@@ -126,6 +130,8 @@ Article.find({}, function(err, doc){
 
 //adds the note id to the article document as a reference back to the note
 app.post('/savednote/:id', function(req, res){
+  var note = req.body;
+  console.log(note);
   var newNote = new Note(req.body);
 
   newNote.save(function(err, doc){
@@ -172,7 +178,7 @@ app.post('/deletenote/:id', function(req, res){
       });
 });
 
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 3000;
 
 app.listen(PORT, function(){
 console.log("PORT is listening on: " + PORT);
