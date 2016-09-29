@@ -171,9 +171,12 @@ app.post('/deletenote/:id', function(req, res){
       });
 });
 
-var PORT = process.env.PORT || 3000;
+// var PORT = process.env.PORT || 3000;
 
-app.listen(PORT, function(){
-console.log("PORT is listening on: " + PORT);
+// app.listen(PORT, function(){
+// console.log("PORT is listening on: " + PORT);
+// });
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
-
