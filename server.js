@@ -14,9 +14,11 @@ var request = require("request");
 app.use(express.static('public'));
 
 //mongoose.connect('ds041526.mlab.com:41526/newsmongodbrs-ds041526:PRIMARY>');
-//mongoose.connect('mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5');
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5');
+//mongoose.connect(process.env.MONGODB_URI);
 var db = mongoose.connection;
+
+
 
 db.on('error', function(err){
   console.log("Mongoose error", err);
@@ -40,9 +42,10 @@ var Note = require('./models/note');
 
 // Routes 
 
-// app.get('/', function (req, res){
-//   res.send('public/index.html');
-// });
+app.get('/', function(req, res) {
+  res.sendFile('public/index.html')
+});
+
 
 app.get('/scrape', function(req, res){
   request('https://www.bloomberg.com/', function(err, response, html){

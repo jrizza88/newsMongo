@@ -7,8 +7,8 @@
 6 silly lifecycle newsmongo@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle newsmongo@1.0.0~start: newsmongo@1.0.0
 8 verbose lifecycle newsmongo@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle newsmongo@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/jamartorres/Desktop/Bootcamp/Homework/newsMongo/node_modules/.bin:/Users/jamartorres/.rvm/gems/ruby-2.2.3/bin:/Users/jamartorres/.rvm/gems/ruby-2.2.3@global/bin:/Users/jamartorres/.rvm/rubies/ruby-2.2.3/bin:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jamartorres/.rvm/bin
-10 verbose lifecycle newsmongo@1.0.0~start: CWD: /Users/jamartorres/Desktop/Bootcamp/Homework/newsMongo
+9 verbose lifecycle newsmongo@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/jamartorres/Desktop/Bootcamp/Homework/newsmongo/node_modules/.bin:/Users/jamartorres/.rvm/gems/ruby-2.2.3/bin:/Users/jamartorres/.rvm/gems/ruby-2.2.3@global/bin:/Users/jamartorres/.rvm/rubies/ruby-2.2.3/bin:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jamartorres/.rvm/bin
+10 verbose lifecycle newsmongo@1.0.0~start: CWD: /Users/jamartorres/Desktop/Bootcamp/Homework/newsmongo
 11 silly lifecycle newsmongo@1.0.0~start: Args: [ '-c', 'node server.js' ]
 12 silly lifecycle newsmongo@1.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle newsmongo@1.0.0~start: Failed to exec start script
@@ -23,7 +23,7 @@
 14 verbose stack     at maybeClose (internal/child_process.js:852:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
 15 verbose pkgid newsmongo@1.0.0
-16 verbose cwd /Users/jamartorres/Desktop/Bootcamp/Homework/newsMongo
+16 verbose cwd /Users/jamartorres/Desktop/Bootcamp/Homework/newsmongo
 17 error Darwin 15.6.0
 18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
 19 error node v6.3.0
