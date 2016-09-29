@@ -10,26 +10,8 @@ var logger = require('morgan');
 var cheerio = require("cheerio");
 var request = require("request");
 
-//use morgan and bodyparser with our app
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-
 // make a public static directory
 app.use(express.static('public'));
-
-
-
-//var databaseUrl = "news";
-
-// will check back later if an array of stories makes sense. 
-//var collections = ["stories"];
-
-// use mongojs to hook the database to the db variable 
-//var db = mongojs(databaseUrl, collections);
-
-//var mongodbUri = 'mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5';
 
 mongoose.connect('mongodb://heroku_llhsm7m5:slv8kb1hm88ms6rgrho6fqlp23@ds019846.mlab.com:19846/heroku_llhsm7m5');
 var db = mongoose.connection;
@@ -42,9 +24,15 @@ db.once('open', function(){
   console.log('Mongoose connection successful. ');
 });
 
+//use morgan and bodyparser with our app
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
 // bring in the Note and Article models
-var Article = require('./models/Article.js');
-var Note = require('./models/Note.js');
+var Article = require('./models/article');
+var Note = require('./models/note');
 
 
 
